@@ -1,54 +1,53 @@
-import { Code, Layers, Palette, Sparkles, Zap, Shield } from "lucide-react"
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { GlowingTiltCard } from "@/components/ui/glowing-tilt-card"
 import { ParallaxScroll } from "@/components/ui/parallax-scroll"
 import { AnimatedText } from "@/components/ui/animated-text"
 import { AnimatedBackground } from "@/components/ui/animated-background"
 import { ProgressCard } from "@/components/ui-library/cards/progress-card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Icon from "@/components/ui/icon"
 
 export function FeaturesSection() {
   const features = [
     {
-      icon: <Layers className="h-10 w-10 text-red-500" />,
-      title: "Модульные компоненты",
-      description: "Собирайте сложные интерфейсы из переиспользуемых компонентов.",
+      icon: <Icon name="Users" className="h-10 w-10 text-red-500" />,
+      title: "Комнаты на 4–15 игроков",
+      description: "Создай приватную комнату для друзей или вступи в публичную игру с незнакомцами.",
       progress: 100,
       borderClass: "border-glow-red",
     },
     {
-      icon: <Palette className="h-10 w-10 text-blue-500" />,
-      title: "Гибкие темы",
-      description: "Легко настраивайте цвета, шрифты и стили под ваш бренд.",
-      progress: 90,
+      icon: <Icon name="Shuffle" className="h-10 w-10 text-blue-500" />,
+      title: "Случайные роли",
+      description: "Мафия, Детектив, Доктор, Мирный житель — роли раздаются автоматически и честно.",
+      progress: 100,
       borderClass: "border-glow-blue",
     },
     {
-      icon: <Zap className="h-10 w-10 text-yellow-500" />,
-      title: "Высокая скорость",
-      description: "Легковесные компоненты для быстрой загрузки и работы.",
+      icon: <Icon name="MessageCircle" className="h-10 w-10 text-yellow-500" />,
+      title: "Чат и голосование",
+      description: "Обсуждай, обвиняй и голосуй в реальном времени прямо в игре.",
       progress: 95,
       borderClass: "border-glow-yellow",
     },
     {
-      icon: <Code className="h-10 w-10 text-green-500" />,
-      title: "TypeScript из коробки",
-      description: "Полная типизация для лучшего DX и меньше багов.",
+      icon: <Icon name="Moon" className="h-10 w-10 text-green-500" />,
+      title: "Ночные фазы",
+      description: "Мафия тайно выбирает жертву ночью, пока мирные жители спят.",
       progress: 100,
       borderClass: "border-glow-green",
     },
     {
-      icon: <Sparkles className="h-10 w-10 text-purple-500" />,
-      title: "Анимации",
-      description: "Красивые анимации и переходы на базе Framer Motion.",
+      icon: <Icon name="Trophy" className="h-10 w-10 text-purple-500" />,
+      title: "Рейтинг и статистика",
+      description: "Следи за своим прогрессом, процентом побед и любимыми ролями.",
       progress: 85,
       borderClass: "border-glow-purple",
     },
     {
-      icon: <Shield className="h-10 w-10 text-orange-500" />,
-      title: "Доступность",
-      description: "Компоненты соответствуют стандартам WCAG для всех пользователей.",
+      icon: <Icon name="Smartphone" className="h-10 w-10 text-orange-500" />,
+      title: "Играй с телефона",
+      description: "Адаптивный интерфейс — удобно играть с любого устройства без установки.",
       progress: 92,
       borderClass: "border-glow-orange",
     },
@@ -63,13 +62,13 @@ export function FeaturesSection() {
           <div className="flex flex-col items-center justify-center space-y-6 text-center mb-12">
             <div className="space-y-4">
               <AnimatedText
-                text="Возможности для современной веб-разработки"
+                text="Всё для идеальной игры в Мафию"
                 variant="heading"
                 className="text-3xl font-heading font-bold tracking-tighter sm:text-5xl gradient-text"
                 animation="slide"
               />
               <AnimatedText
-                text="Наша библиотека содержит все необходимое для создания красивых, интерактивных и доступных веб-приложений."
+                text="Никаких карточек и ведущего — игра сама следит за правилами, фазами и голосованием."
                 variant="paragraph"
                 className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400 opacity-70"
                 animation="fade"

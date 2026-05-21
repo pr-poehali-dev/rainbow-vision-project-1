@@ -8,54 +8,54 @@ import { motion } from "framer-motion"
 export function PricingSection() {
   const plans = [
     {
-      name: "Старт",
-      description: "Для небольших проектов и независимых разработчиков.",
-      price: "4 900 ₽",
-      duration: "единоразово",
+      name: "Новичок",
+      description: "Попробуй игру бесплатно с друзьями.",
+      price: "Бесплатно",
+      duration: "навсегда",
       features: [
-        "50+ UI-компонентов",
-        "Адаптивный дизайн",
-        "Интеграция с Tailwind CSS",
-        "Поддержка 6 месяцев",
-        "Базовая документация",
+        "До 8 игроков в комнате",
+        "3 базовые роли",
+        "Публичные комнаты",
+        "Чат в игре",
+        "Базовая статистика",
       ],
-      cta: "Начать",
+      cta: "Играть бесплатно",
       popular: false,
     },
     {
-      name: "Про",
-      description: "Для профессионалов и небольших команд.",
-      price: "9 900 ₽",
-      duration: "единоразово",
+      name: "Игрок",
+      description: "Для тех, кто играет серьёзно.",
+      price: "299 ₽",
+      duration: "в месяц",
       features: [
-        "100+ UI-компонентов",
-        "Адаптивный дизайн",
-        "Интеграция с Tailwind CSS",
-        "Поддержка 12 месяцев",
-        "Полная документация",
-        "Исходный код",
-        "Премиум-компоненты",
+        "До 15 игроков в комнате",
+        "8 уникальных ролей",
+        "Приватные комнаты",
+        "Голосовой чат",
+        "Детальная статистика",
+        "Кастомные аватары",
+        "Рейтинговые игры",
       ],
-      cta: "Выбрать Про",
+      cta: "Выбрать тариф",
       popular: true,
     },
     {
-      name: "Бизнес",
-      description: "Для крупных команд и сложных проектов.",
-      price: "24 900 ₽",
-      duration: "единоразово",
+      name: "Хост",
+      description: "Для организаторов турниров и клубов.",
+      price: "799 ₽",
+      duration: "в месяц",
       features: [
-        "200+ UI-компонентов",
-        "Адаптивный дизайн",
-        "Интеграция с Tailwind CSS",
-        "Пожизненная поддержка",
-        "Полная документация",
-        "Исходный код",
-        "Премиум-компоненты",
-        "Кастомные компоненты",
+        "До 20 игроков в комнате",
+        "Все роли и модификации",
+        "Управление турнирами",
+        "Роль ведущего (GM)",
+        "Кастомные правила",
         "Приоритетная поддержка",
+        "Брендирование комнат",
+        "Аналитика игр",
+        "API для интеграций",
       ],
-      cta: "Связаться",
+      cta: "Стать хостом",
       popular: false,
     },
   ]
@@ -67,10 +67,10 @@ export function PricingSection() {
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h2 className="text-3xl font-heading font-bold tracking-tighter sm:text-5xl">
-                Простые и понятные цены
+                Выбери свой стол
               </h2>
               <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400 opacity-70">
-                Выберите подходящий тариф и начните создавать потрясающие интерфейсы.
+                Начни бесплатно, а когда втянешься — открой все возможности игры.
               </p>
             </div>
           </div>
@@ -82,7 +82,7 @@ export function PricingSection() {
               <Card className={`h-full flex flex-col glassmorphic-card ${plan.popular ? "border-glow-red" : ""}`}>
                 {plan.popular && (
                   <div className="absolute top-0 right-0 -mt-2 -mr-2 px-3 py-1 bg-red-500 text-white text-xs font-medium rounded-full">
-                    Хит
+                    Популярно
                   </div>
                 )}
                 <CardHeader>

@@ -9,11 +9,10 @@ export function SiteFooter() {
           <div className="flex flex-1 flex-col gap-4">
             <a href="/" className="flex items-center gap-2">
               <Icons.logo className="h-6 w-6" />
-              <span className="font-heading text-xl tracking-tight">PixelForge</span>
+              <span className="font-heading text-xl tracking-tight">Мафия</span>
             </a>
             <p className="text-muted-foreground max-w-sm opacity-70">
-              Современная библиотека UI-компонентов на базе shadcn/ui и Aceternity UI для веб-разработчиков и дизайнеров
-              в сфере AI-софта.
+              Онлайн-игра в Мафию прямо в браузере. Собирай друзей, раздавай роли и выясняй — кто среди вас преступник.
             </p>
             <div className="flex gap-4">
               <a href="https://twitter.com" target="_blank" rel="noreferrer" className="glassmorphic-icon">
@@ -32,74 +31,50 @@ export function SiteFooter() {
           </div>
           <div className="grid flex-1 grid-cols-2 gap-10 sm:grid-cols-3">
             <div className="flex flex-col gap-2">
-              <h3 className="text-sm font-medium tracking-tight">Продукт</h3>
+              <h3 className="text-sm font-medium tracking-tight">Игра</h3>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <a
-                    href="#features"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
-                    Функции
+                  <a href="#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
+                    Как играть
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#pricing"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
-                    Цены
+                  <a href="#pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
+                    Тарифы
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#components"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
-                    Компоненты
+                  <a href="#play" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
+                    Играть онлайн
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#changelog"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
-                    Изменения
+                  <a href="#roles" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
+                    Все роли
                   </a>
                 </li>
               </ul>
             </div>
             <div className="flex flex-col gap-2">
-              <h3 className="text-sm font-medium tracking-tight">Компания</h3>
+              <h3 className="text-sm font-medium tracking-tight">Сообщество</h3>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <a
-                    href="#about"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
-                    О нас
+                  <a href="#about" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
+                    О проекте
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#blog"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
-                    Блог
+                  <a href="https://discord.com" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
+                    Discord
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#careers"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
-                    Вакансии
+                  <a href="#tournaments" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
+                    Турниры
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#contact"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
+                  <a href="#contact" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
                     Контакты
                   </a>
                 </li>
@@ -109,35 +84,18 @@ export function SiteFooter() {
               <h3 className="text-sm font-medium tracking-tight">Правовая информация</h3>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <a
-                    href="#privacy"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
+                  <a href="#privacy" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
                     Конфиденциальность
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#terms"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
+                  <a href="#terms" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
                     Условия
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#cookies"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
+                  <a href="#cookies" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
                     Cookies
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#licenses"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-                  >
-                    Лицензии
                   </a>
                 </li>
               </ul>
@@ -146,19 +104,13 @@ export function SiteFooter() {
         </div>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="text-sm text-muted-foreground opacity-70">
-            &copy; {new Date().getFullYear()} PixelForge. Все права защищены.
+            &copy; {new Date().getFullYear()} Мафия Онлайн. Все права защищены.
           </p>
           <div className="flex gap-4">
-            <a
-              href="#terms"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-            >
+            <a href="#terms" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
               Условия
             </a>
-            <a
-              href="#privacy"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70"
-            >
+            <a href="#privacy" className="text-sm text-muted-foreground transition-colors hover:text-foreground opacity-70">
               Конфиденциальность
             </a>
           </div>

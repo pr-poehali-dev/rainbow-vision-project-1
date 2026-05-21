@@ -8,25 +8,25 @@ import { AnimatedBackground } from "@/components/ui/animated-background"
 export function TestimonialsSection() {
   const testimonials = [
     {
-      name: "Алексей Иванов",
-      role: "Frontend-разработчик",
+      name: "Артём Волков",
+      role: "Играет 2 года · 340 игр",
       content:
-        "Эта библиотека сэкономила мне кучу времени на разработку. Компоненты красиво оформлены и легко настраиваются.",
-      avatar: "АИ",
+        "Лучшая онлайн-Мафия из всех, что я пробовал. Интерфейс понятный, роли сбалансированы, а голосовой чат делает игру живой. Засиживаемся с друзьями до утра!",
+      avatar: "АВ",
     },
     {
-      name: "Мария Петрова",
-      role: "UI/UX-дизайнер",
+      name: "Наташа Лебедева",
+      role: "Играет 1 год · 180 игр",
       content:
-        "Как дизайнер, я ценю внимание к деталям в этих компонентах. Они не только функциональны, но и эстетичны.",
-      avatar: "МП",
+        "Открыла для себя этот сайт случайно и теперь играю каждый вечер. Удобно, что можно зайти с телефона и сразу начать — никаких скачиваний.",
+      avatar: "НЛ",
     },
     {
-      name: "Дмитрий Козлов",
-      role: "Продакт-менеджер",
+      name: "Максим Орлов",
+      role: "Организатор турниров",
       content:
-        "Продуктивность нашей команды значительно выросла с этой библиотекой. Документация отличная, компоненты надежные.",
-      avatar: "ДК",
+        "Провожу еженедельные турниры для своего клуба. Функции хоста — огонь: можно задать свои правила, назначить роли вручную и вести статистику.",
+      avatar: "МО",
     },
   ]
 
@@ -39,13 +39,13 @@ export function TestimonialsSection() {
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <AnimatedText
-                text="Отзывы пользователей"
+                text="Что говорят игроки"
                 variant="heading"
                 className="text-3xl font-heading font-bold tracking-tighter sm:text-5xl"
                 animation="slide"
               />
               <AnimatedText
-                text="Узнайте, что говорят разработчики и дизайнеры, использующие нашу библиотеку."
+                text="Тысячи игр сыграно, сотни блефов раскрыто — вот истории наших игроков."
                 variant="paragraph"
                 className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400 opacity-70"
                 animation="fade"
