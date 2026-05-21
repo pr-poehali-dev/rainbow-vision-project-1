@@ -12,7 +12,6 @@ const navItems = [
   { name: "Главная", href: "#home" },
   { name: "Как играть", href: "#features" },
   { name: "Отзывы", href: "#testimonials" },
-  { name: "Тарифы", href: "#pricing" },
   { name: "FAQ", href: "#faq" },
 ]
 
