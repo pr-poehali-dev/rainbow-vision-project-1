@@ -367,6 +367,7 @@ export default function Checkin() {
   const [selectedRoom, setSelectedRoom] = useState<number | null>(null)
   const [occupiedRooms, setOccupiedRooms] = useState<OccupiedRoom[]>([])
   const [loading, setLoading] = useState(false)
+  const [timeOfDay, setTimeOfDay] = useState<"day" | "night">("night")
 
   const user = location.state || JSON.parse(sessionStorage.getItem("mafia_user") || "{}")
 
@@ -377,6 +378,7 @@ export default function Checkin() {
     const res = await fetch(ROOMS_API)
     const data = await res.json()
     setOccupiedRooms(data.rooms || [])
+    if (data.time_of_day) setTimeOfDay(data.time_of_day)
   }, [])
 
   useEffect(() => {
@@ -590,10 +592,10 @@ export default function Checkin() {
         </div>
 
         {/* Status bar */}
-        <div className="mt-4 text-center">
+        <div className="mt-4 space-y-3">
           {selectedRoom ? (
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-              className="flex items-center justify-center gap-4 flex-wrap">
+              className="flex items-center justify-center gap-3 flex-wrap">
               <span className="text-red-400 text-sm font-medium">
                 🔑 Ты заселился в комнату {selectedRoom}
               </span>
@@ -606,8 +608,32 @@ export default function Checkin() {
               </button>
             </motion.div>
           ) : (
-            <p className="text-gray-700 text-xs">Нажми на любую комнату, чтобы рассмотреть и заселиться</p>
+            <p className="text-gray-700 text-xs text-center">Нажми на любую комнату, чтобы рассмотреть и заселиться</p>
           )}
+
+          {/* Negotiations button — shown at daytime when player is checked in */}
+          <AnimatePresence>
+            {selectedRoom && timeOfDay === "day" && (
+              <motion.button
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                onClick={() => navigate("/negotiations", { state: { ...user, room_number: selectedRoom } })}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl font-bold text-base"
+                style={{
+                  background: "linear-gradient(135deg, #1a1005, #2d1f08)",
+                  color: "#f59e0b",
+                  border: "2px solid #d97706",
+                  boxShadow: "0 0 20px rgba(217,119,6,0.3)",
+                }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <span className="text-xl">🪑</span>
+                <span>Стол переговоров</span>
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
       </motion.div>
 

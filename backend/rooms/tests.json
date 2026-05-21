@@ -7,17 +7,45 @@
       "expectedStatus": 200
     },
     {
-      "name": "POST checkin player",
+      "name": "POST checkin player 1",
       "method": "POST",
       "path": "/",
-      "body": {"room_number": 1, "nickname": "TestPlayer", "avatar": "", "role": "citizen"},
+      "body": {"room_number": 1, "nickname": "TestPlayer1", "avatar": "", "role": "citizen"},
       "expectedStatus": 200
     },
     {
-      "name": "DELETE checkout player",
+      "name": "POST checkin player 2",
+      "method": "POST",
+      "path": "/",
+      "body": {"room_number": 2, "nickname": "TestPlayer2", "avatar": "", "role": "mafia"},
+      "expectedStatus": 200
+    },
+    {
+      "name": "POST vote",
+      "method": "POST",
+      "path": "/",
+      "body": {"action": "vote", "voter_room": 1, "target_room": 2, "bet": 3},
+      "expectedStatus": 200
+    },
+    {
+      "name": "POST eliminate",
+      "method": "POST",
+      "path": "/",
+      "body": {"action": "eliminate", "room_number": 2},
+      "expectedStatus": 200
+    },
+    {
+      "name": "DELETE checkout player 1",
       "method": "DELETE",
       "path": "/",
       "body": {"room_number": 1},
+      "expectedStatus": 200
+    },
+    {
+      "name": "DELETE checkout player 2",
+      "method": "DELETE",
+      "path": "/",
+      "body": {"room_number": 2},
       "expectedStatus": 200
     }
   ]

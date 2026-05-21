@@ -83,6 +83,7 @@ export default function Host() {
     const res = await fetch(ROOMS_API)
     const data = await res.json()
     setOccupiedRooms(data.rooms || [])
+    if (data.time_of_day) setTimeOfDay(data.time_of_day as TimeOfDay)
   }, [])
 
   useEffect(() => {
@@ -96,6 +97,11 @@ export default function Host() {
     setTransitioning(true)
     await new Promise(r => setTimeout(r, 200))
     setTimeOfDay(newTime)
+    await fetch(ROOMS_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "set_time", time_of_day: newTime }),
+    })
     setTransitioning(false)
   }
 
@@ -292,6 +298,34 @@ export default function Host() {
             <div className="text-xs" style={{ color: isNight ? "#555" : "#aaa" }}>игроков</div>
           </div>
         </div>
+
+        {/* Negotiations button — only in daytime */}
+        <AnimatePresence>
+          {!isNight && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mb-4"
+            >
+              <motion.button
+                onClick={() => navigate("/negotiations", { state: user })}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl font-bold text-base"
+                style={{
+                  background: "linear-gradient(135deg, #1a1005, #2d1f08)",
+                  color: "#f59e0b",
+                  border: "2px solid #d97706",
+                  boxShadow: "0 0 24px rgba(217,119,6,0.35), inset 0 1px 0 rgba(255,200,50,0.1)",
+                }}
+              >
+                <span className="text-xl">🪑</span>
+                <span>Стол переговоров</span>
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Night / Morning buttons */}
         <div className="flex gap-3 mb-5">
