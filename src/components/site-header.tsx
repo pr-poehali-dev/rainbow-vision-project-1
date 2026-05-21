@@ -1,6 +1,7 @@
 import * as React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { List, X } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -18,6 +19,7 @@ const navItems = [
 export function SiteHeader() {
   const scrollPosition = useScrollPosition()
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const navigate = useNavigate()
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
@@ -63,8 +65,8 @@ export function SiteHeader() {
           <ModeToggle />
 
           <div className="hidden md:flex items-center space-x-2">
-            <Button variant="ghost" size="sm" className="neumorphic-button" asChild>
-              <a href="#login">Войти</a>
+            <Button variant="ghost" size="sm" className="neumorphic-button" onClick={() => navigate("/login")}>
+              Войти
             </Button>
             <Button size="sm" className="neumorphic-button-primary" asChild>
               <a href="#register">
@@ -143,10 +145,8 @@ export function SiteHeader() {
 
               <div className="mt-auto p-4 border-t border-border">
                 <div className="grid grid-cols-2 gap-3">
-                  <Button variant="outline" className="w-full" asChild>
-                    <a href="#login" onClick={closeMobileMenu}>
-                      Войти
-                    </a>
+                  <Button variant="outline" className="w-full" onClick={() => { closeMobileMenu(); navigate("/login") }}>
+                    Войти
                   </Button>
                   <Button className="w-full neumorphic-button-primary" asChild>
                     <a href="#register" onClick={closeMobileMenu}>
