@@ -1,6 +1,15 @@
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
+
+const ROOMS_API = "https://functions.poehali.dev/9d8dc40f-548f-4a38-b857-de8c0359ae9d"
+
+interface OccupiedRoom {
+  room_number: number
+  player_nickname: string
+  player_avatar: string
+  player_role: string
+}
 
 const roomThemes = [
   { id: 1, wall: "#1a0a0a", floor: "#2d1515", bedColor: "#8B0000", bedSheet: "#3d0000", curtain: "#4a0000", decoration: "🩸", extra: "spider", windowGlow: "rgba(180,0,0,0.4)", accent: "#ff2200" },
@@ -251,9 +260,11 @@ interface ModalProps {
   onClose: () => void
   onSelect: () => void
   isSelected: boolean
+  occupant?: OccupiedRoom | null
+  loading?: boolean
 }
 
-function RoomModal({ roomNum, theme, onClose, onSelect, isSelected }: ModalProps) {
+function RoomModal({ roomNum, theme, onClose, onSelect, isSelected, occupant, loading }: ModalProps) {
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -294,26 +305,45 @@ function RoomModal({ roomNum, theme, onClose, onSelect, isSelected }: ModalProps
             <span className="text-4xl">{theme.decoration}</span>
           </div>
 
+          {/* Occupant info */}
+          {occupant && !isSelected && (
+            <div className="flex items-center gap-3 mb-4 p-3 rounded-xl" style={{ background: "#111", border: `1px solid ${theme.accent}44` }}>
+              {occupant.player_avatar ? (
+                <img src={occupant.player_avatar} alt={occupant.player_nickname} className="w-10 h-10 rounded-full object-cover" style={{ border: `2px solid ${theme.accent}` }} />
+              ) : (
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg" style={{ background: theme.accent + "22", border: `2px solid ${theme.accent}` }}>👤</div>
+              )}
+              <div>
+                <div className="text-sm font-bold text-white">{occupant.player_nickname}</div>
+                <div className="text-xs text-gray-500">уже заселился</div>
+              </div>
+            </div>
+          )}
+
           <div className="flex gap-3">
-            {!isSelected ? (
+            {isSelected ? (
+              <div className="flex-1 py-2.5 rounded-xl font-bold text-sm text-center"
+                style={{ background: "#1a1a1a", color: theme.accent, border: `1px solid ${theme.accent}` }}>
+                ✓ Твоя комната
+              </div>
+            ) : occupant ? (
+              <div className="flex-1 py-2.5 rounded-xl font-bold text-sm text-center text-gray-600"
+                style={{ background: "#111", border: "1px solid #333" }}>
+                🔒 Занято
+              </div>
+            ) : (
               <button
                 onClick={onSelect}
-                className="flex-1 py-2.5 rounded-xl font-bold text-sm transition-all"
+                disabled={loading}
+                className="flex-1 py-2.5 rounded-xl font-bold text-sm transition-all disabled:opacity-50"
                 style={{
                   background: `linear-gradient(to right, ${theme.accent}cc, ${theme.accent}88)`,
                   color: "white",
                   boxShadow: `0 0 20px ${theme.accent}44`,
                 }}
               >
-                Заселиться сюда
+                {loading ? "Заселяю..." : "Заселиться сюда"}
               </button>
-            ) : (
-              <div
-                className="flex-1 py-2.5 rounded-xl font-bold text-sm text-center"
-                style={{ background: "#1a1a1a", color: theme.accent, border: `1px solid ${theme.accent}` }}
-              >
-                ✓ Твоя комната
-              </div>
             )}
             <button
               onClick={onClose}
@@ -331,13 +361,48 @@ function RoomModal({ roomNum, theme, onClose, onSelect, isSelected }: ModalProps
 
 export default function Checkin() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [hoveredRoom, setHoveredRoom] = useState<number | null>(null)
   const [openRoom, setOpenRoom] = useState<number | null>(null)
   const [selectedRoom, setSelectedRoom] = useState<number | null>(null)
+  const [occupiedRooms, setOccupiedRooms] = useState<OccupiedRoom[]>([])
+  const [loading, setLoading] = useState(false)
+
+  const user = location.state || JSON.parse(sessionStorage.getItem("mafia_user") || "{}")
 
   const floors = [6, 5, 4, 3, 2, 1]
-
   const openTheme = openRoom ? roomThemes[openRoom - 1] : null
+
+  const fetchRooms = useCallback(async () => {
+    const res = await fetch(ROOMS_API)
+    const data = await res.json()
+    setOccupiedRooms(data.rooms || [])
+  }, [])
+
+  useEffect(() => {
+    fetchRooms()
+    const interval = setInterval(fetchRooms, 3000)
+    return () => clearInterval(interval)
+  }, [fetchRooms])
+
+  const handleCheckin = async (roomNum: number) => {
+    if (loading) return
+    setLoading(true)
+    await fetch(ROOMS_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        room_number: roomNum,
+        nickname: user.nickname || "Игрок",
+        avatar: user.avatar || "",
+        role: user.role || "citizen",
+      }),
+    })
+    setSelectedRoom(roomNum)
+    await fetchRooms()
+    setLoading(false)
+    setOpenRoom(null)
+  }
 
   return (
     <div
@@ -407,6 +472,7 @@ export default function Checkin() {
                     const theme = roomThemes[roomNum - 1]
                     const isHovered = hoveredRoom === roomNum
                     const isSelected = selectedRoom === roomNum
+                    const occupant = occupiedRooms.find(r => r.room_number === roomNum)
 
                     return (
                       <motion.div
@@ -416,11 +482,15 @@ export default function Checkin() {
                           aspectRatio: "4/3",
                           border: isSelected
                             ? `2px solid ${theme.accent}`
+                            : occupant
+                            ? `1.5px solid ${theme.accent}66`
                             : isHovered
                             ? `1.5px solid ${theme.accent}88`
                             : "1px solid #1a0505",
                           boxShadow: isSelected
                             ? `0 0 16px ${theme.accent}55`
+                            : occupant
+                            ? `0 0 6px ${theme.accent}33`
                             : isHovered
                             ? `0 0 8px ${theme.accent}33`
                             : "none",
@@ -433,6 +503,20 @@ export default function Checkin() {
                         transition={{ type: "spring", stiffness: 400, damping: 25 }}
                       >
                         <RoomSVG theme={theme} />
+
+                        {/* Occupant avatar overlay */}
+                        {occupant && !isSelected && (
+                          <div className="absolute bottom-0 left-0 right-0 flex items-center gap-1 px-1 pb-1" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85), transparent)" }}>
+                            {occupant.player_avatar ? (
+                              <img src={occupant.player_avatar} alt="" className="w-5 h-5 rounded-full object-cover shrink-0" style={{ border: `1px solid ${theme.accent}` }} />
+                            ) : (
+                              <div className="w-5 h-5 rounded-full shrink-0 flex items-center justify-center text-xs" style={{ background: theme.accent + "33", border: `1px solid ${theme.accent}` }}>👤</div>
+                            )}
+                            <span className="text-white truncate font-medium" style={{ fontSize: "8px", textShadow: "0 1px 3px #000" }}>
+                              {occupant.player_nickname}
+                            </span>
+                          </div>
+                        )}
 
                         {/* Hover overlay */}
                         <AnimatePresence>
@@ -448,7 +532,7 @@ export default function Checkin() {
                                 <div className="text-xl font-bold" style={{ color: theme.accent, textShadow: `0 0 8px ${theme.accent}`, fontFamily: "serif" }}>
                                   {roomNum}
                                 </div>
-                                <div className="text-xs text-gray-400">открыть</div>
+                                <div className="text-xs text-gray-400">{occupant ? "посмотреть" : "открыть"}</div>
                               </div>
                             </motion.div>
                           )}
@@ -534,11 +618,10 @@ export default function Checkin() {
             roomNum={openRoom}
             theme={openTheme}
             isSelected={selectedRoom === openRoom}
+            occupant={occupiedRooms.find(r => r.room_number === openRoom)}
+            loading={loading}
             onClose={() => setOpenRoom(null)}
-            onSelect={() => {
-              setSelectedRoom(openRoom)
-              setOpenRoom(null)
-            }}
+            onSelect={() => handleCheckin(openRoom)}
           />
         )}
       </AnimatePresence>

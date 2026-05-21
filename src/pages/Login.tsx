@@ -144,7 +144,21 @@ export default function Login() {
               gradientFrom="from-red-500"
               gradientTo="to-red-700"
               disabled={!login || !password || !selectedRole}
-              onClick={() => navigate("/checkin")}
+              onClick={() => {
+                const roleData = roles.find((r) => r.id === selectedRole)
+                const userData = {
+                  nickname: login,
+                  role: selectedRole,
+                  roleName: roleData?.name,
+                  avatar: roleData?.image,
+                }
+                sessionStorage.setItem("mafia_user", JSON.stringify(userData))
+                if (selectedRole === "host") {
+                  navigate("/host", { state: userData })
+                } else {
+                  navigate("/checkin", { state: userData })
+                }
+              }}
             >
               Войти в игру
             </GradientButton>

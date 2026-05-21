@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "name": "GET rooms list",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "POST checkin player",
+      "method": "POST",
+      "path": "/",
+      "body": {"room_number": 1, "nickname": "TestPlayer", "avatar": "", "role": "citizen"},
+      "expectedStatus": 200
+    },
+    {
+      "name": "DELETE checkout player",
+      "method": "DELETE",
+      "path": "/",
+      "body": {"room_number": 1},
+      "expectedStatus": 200
+    }
+  ]
+}
