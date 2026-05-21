@@ -89,40 +89,19 @@ export function HeroSection() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.3}>
-            <SpotlightCard className="relative h-[450px] w-full overflow-hidden rounded-xl border glassmorphic-card p-1 border-glow-red">
-              <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 via-transparent to-gray-900/20 z-10"></div>
-              <div className="relative z-20 h-full w-full rounded-xl bg-gradient-to-br from-red-950/50 to-gray-950/50 p-6 flex items-center justify-center">
-                <div className="grid grid-cols-2 gap-6 w-full max-w-md">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                    className="col-span-2 h-24 rounded-xl bg-red-800/20 border border-red-800/30 flex items-center justify-center glassmorphic-inner-card"
-                    whileHover={{ scale: 1.03, boxShadow: "0 0 15px rgba(220, 38, 38, 0.3)" }}
-                  >
-                    <span className="font-heading text-xl text-white tracking-tight">🔫 Мафия просыпается</span>
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.8 }}
-                    className="h-32 rounded-xl bg-gray-800/20 border border-gray-800/30 flex items-center justify-center glassmorphic-inner-card"
-                    whileHover={{ scale: 1.03, boxShadow: "0 0 15px rgba(75, 85, 99, 0.3)" }}
-                  >
-                    <span className="font-heading text-white tracking-tight">🕵️ Детектив</span>
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 1.0 }}
-                    className="h-32 rounded-xl bg-red-900/20 border border-red-900/30 flex items-center justify-center glassmorphic-inner-card"
-                    whileHover={{ scale: 1.03, boxShadow: "0 0 15px rgba(220, 38, 38, 0.3)" }}
-                  >
-                    <span className="font-heading text-white tracking-tight">🏥 Доктор</span>
-                  </motion.div>
-                </div>
-              </div>
-            </SpotlightCard>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              whileHover={{ scale: 1.03 }}
+              className="flex items-center justify-center"
+            >
+              <img
+                src="https://cdn.poehali.dev/projects/2e60d71c-d072-4223-b892-7e38f25a119a/bucket/99fa4246-9d10-486c-a69f-a41faf818e76.png"
+                alt="Мафия Онлайн"
+                className="w-full max-w-[560px] drop-shadow-[0_0_40px_rgba(220,38,38,0.4)]"
+              />
+            </motion.div>
           </ScrollReveal>
         </div>
       </div>
