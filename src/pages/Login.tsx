@@ -10,6 +10,11 @@ import { cn } from "@/lib/utils"
 
 const roles = [
   {
+    id: "host",
+    name: "Ведущий",
+    image: "https://cdn.poehali.dev/projects/2e60d71c-d072-4223-b892-7e38f25a119a/bucket/5787001c-52d1-41a4-a5f4-2a31473077e9.png",
+  },
+  {
     id: "boss",
     name: "Босс-мафия",
     image: "https://cdn.poehali.dev/projects/2e60d71c-d072-4223-b892-7e38f25a119a/bucket/8d2f6b99-d71d-442a-a7f9-cdd9f2945267.png",
@@ -33,11 +38,6 @@ const roles = [
     id: "citizen",
     name: "Мирный",
     image: "https://cdn.poehali.dev/projects/2e60d71c-d072-4223-b892-7e38f25a119a/bucket/2517821a-ff36-4c20-a54d-6f9ff283a272.png",
-  },
-  {
-    id: "host",
-    name: "Ведущий",
-    image: "https://cdn.poehali.dev/projects/2e60d71c-d072-4223-b892-7e38f25a119a/bucket/5787001c-52d1-41a4-a5f4-2a31473077e9.png",
   },
 ]
 
