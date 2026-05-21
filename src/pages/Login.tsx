@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
+import { useNavigate } from "react-router-dom"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AnimatedBackground } from "@/components/ui/animated-background"
 import { GradientButton } from "@/components/ui-library/buttons/gradient-button"
@@ -42,6 +43,7 @@ const roles = [
 ]
 
 export default function Login() {
+  const navigate = useNavigate()
   const [selectedRole, setSelectedRole] = useState<string | null>(null)
   const [login, setLogin] = useState("")
   const [password, setPassword] = useState("")
@@ -142,6 +144,7 @@ export default function Login() {
               gradientFrom="from-red-500"
               gradientTo="to-red-700"
               disabled={!login || !password || !selectedRole}
+              onClick={() => navigate("/checkin")}
             >
               Войти в игру
             </GradientButton>
